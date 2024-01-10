@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import styles from './TicTacToe.module.css';
-import circle_icon from '../Assets/circle.png';
-import cross_icon from '../Assets/cross.png';
+import { PLAYER_O, PLAYER_X } from '../../Utils/constants';
 import Board from './Board';
 
 export const TicTacToe = () => {
-    const [tiles, setTiles] = useState(Array(9).fill('X'));
+    const [tiles, setTiles] = useState(Array(9).fill(null));
+    const [playerTurn, setPlayerTurn] = useState(PLAYER_X);
 
     return (
         <div className={styles.container}>

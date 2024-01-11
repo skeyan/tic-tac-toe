@@ -6,12 +6,24 @@ import Board from './Board';
 
 /**
  * A simple TicTacToe game component with the standard board and conditions.
+ * It represents the game.
  * @returns A TicTacToe game component, ready to use
  */
 export const TicTacToe = () => {
+    /**
+     * @property {Array} tiles An array representing the tiles of the game.
+     */
     const [tiles, setTiles] = useState(Array(9).fill(null));
+    /**
+     * @property {String} playerTurn A string representing the player whose turn it is.
+     */
     const [playerTurn, setPlayerTurn] = useState(PLAYER_X);
 
+    /**
+     * Callback function for when a tile is clicked.
+     * @param {int} clickedTileIndex The identifier for which tile was clicked
+     * @returns void
+     */
     const handleTileClick = (clickedTileIndex) => {
         // Do not allow clicks on already filled tiles
         if (tiles[clickedTileIndex] !== null) {
@@ -26,6 +38,10 @@ export const TicTacToe = () => {
         switchPlayerTurn();
     }
 
+    /**
+     * A function to help swap player turns.
+     * @returns void
+     */
     const switchPlayerTurn = () => {
         if (playerTurn === PLAYER_X) {
             setPlayerTurn(PLAYER_O);

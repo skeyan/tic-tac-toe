@@ -37,7 +37,7 @@ export const TicTacToe = () => {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>TicTacToe - Built In React.js</h1>
-            <Board tiles={tiles} onTileClick={handleTileClick}/>
+            <Board playerTurn={playerTurn} tiles={tiles} onTileClick={handleTileClick}/>
             <button className={styles.reset}>Reset</button>
         </div>
     )

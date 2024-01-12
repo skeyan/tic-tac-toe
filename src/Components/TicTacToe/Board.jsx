@@ -1,6 +1,5 @@
 import Tile from "./Tile";
 import styles from "./Board.module.css";
-import Strike from "./Strike";
 
 /**
  * A board component containing various tiles.
@@ -26,7 +25,6 @@ function Board({ playerTurn, winner, winCombo, tiles, onTileClick }) {
                     winCombo={winCombo}
                 />)
             }
-            <Strike/>
         </div>
     );
 }

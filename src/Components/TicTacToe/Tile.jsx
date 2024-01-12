@@ -29,11 +29,19 @@ function Tile({ index, value, onClick, playerTurn, winner, winCombo }) {
         }
     }
 
+    /**
+     * A function to get the CSS class names for this tile.
+     * @returns String representing the CSS class for the style of the tiles
+     */
+    function getTileClasses() {
+        if (winner && winCombo.includes(index)) {
+            return  `${styles['tile']} ${styles['tile--win']}`;
+        }
+        return styles['tile'];
+    }
+
     return (
-        <button className={
-            (winner && winCombo.includes(index)) ?
-            `${styles['tile']} ${styles['tile--win']}` :
-            `${styles['tile']}`}
+        <button className={getTileClasses()}
             onClick={onClick}
         >
             <div className={styles.tile__value}>

@@ -84,6 +84,17 @@ export const TicTacToe = () => {
         }
     }
 
+    /**
+     * Function to reset the game and start over.
+     * @return void
+     */
+    const resetGame = () => {
+        setTiles(Array(9).fill(null));
+        setPlayerTurn(PLAYER_X);
+        setWinCombo([]);
+        setWinner(null);
+    }
+
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>TicTacToe - Built In React.js</h1>
@@ -99,7 +110,7 @@ export const TicTacToe = () => {
                 tiles={tiles}
                 onTileClick={handleTileClick}
             />
-            <button className={styles.reset}>Reset</button>
+            <button className={styles.reset} onClick={resetGame}>Reset</button>
         </div>
     )
 }

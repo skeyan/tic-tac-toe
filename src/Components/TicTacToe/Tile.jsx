@@ -15,9 +15,9 @@ function Tile({ value, onClick, playerTurn }) {
      */
     function placeholderValue()  {
         if (playerTurn === PLAYER_X) {
-            return <div className={styles['tile__value-placeholder']} inert aria-hidden="true" tabindex="-1">X</div>;
+            return <div className={styles['tile__value-placeholder']} inert="true">X</div>;
         } else if (playerTurn === PLAYER_O) {
-            return <div className={styles['tile__value-placeholder']} inert aria-hidden="true" tabindex="-1">O</div>;
+            return <div className={styles['tile__value-placeholder']} inert="true">O</div>;
         }
     }
 

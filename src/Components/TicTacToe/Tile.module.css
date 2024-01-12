@@ -8,6 +8,10 @@
     justify-content: center;
 }
 
+.tile--win {
+    background: #275368;
+}
+
 .tile:hover {
     .tile__value-placeholder {
         color: rgba(255, 255, 255, 0.4);

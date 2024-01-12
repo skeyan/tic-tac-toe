@@ -22,6 +22,10 @@ export const TicTacToe = () => {
      * @property {String} winner The player who has won the current game.
      */
     const [winner, setWinner] = useState(null);
+    /**
+     * @property {String} winCombo The combination the won the current game.
+     */
+    const [winCombo, setWinCombo] = useState([]);
 
     /**
      * Callback function for when a tile is clicked.
@@ -56,11 +60,11 @@ export const TicTacToe = () => {
     }
 
     /**
-     * A function to determine who the winner is (if any).
-     * @returns string or null
+     * A function to initiate the check to see who the winner is (if any).
+     * @returns void
      */
     const checkWinStatus = (tiles) => {
-        const winCombinations = [
+        const validWinCombos = [
             [0, 1, 2],
             [3, 4, 5],
             [6, 7, 8],
@@ -71,14 +75,13 @@ export const TicTacToe = () => {
             [2, 4, 6],
           ];
 
-        for (let i = 0; i < winCombinations.length; i++) {
-            const [a, b, c] = winCombinations[i];
+        for (let i = 0; i < validWinCombos.length; i++) {
+            const [a, b, c] = validWinCombos[i];
             if (tiles[a] && (tiles[a] === tiles[b]) && (tiles[a] === tiles[c])) {
                 setWinner(tiles[a]);
-                return tiles[a];
+                setWinCombo([a, b, c]);
             }
         }
-        return null;
     }
 
     return (
@@ -89,7 +92,13 @@ export const TicTacToe = () => {
                 <div className={styles.subtitle}>Winner: {winner}</div> :
                 <div className={styles.subtitle}>Current Turn: {playerTurn}</div>
             }
-            <Board playerTurn={playerTurn} winner={winner} tiles={tiles} onTileClick={handleTileClick}/>
+            <Board
+                playerTurn={playerTurn}
+                winner={winner}
+                winCombo={winCombo}
+                tiles={tiles}
+                onTileClick={handleTileClick}
+            />
             <button className={styles.reset}>Reset</button>
         </div>
     )

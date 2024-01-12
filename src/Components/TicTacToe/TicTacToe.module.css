@@ -25,8 +25,8 @@
 .reset {
     background: #1f3540;
     border: 0px;
-    border-radius: 50px;
-    color: #26ffcb;
+    border-radius: 10px;
+    color: white;
     cursor: pointer;
     height:50px;
     margin-top: 25px;

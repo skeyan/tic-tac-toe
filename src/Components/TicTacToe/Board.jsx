@@ -10,7 +10,7 @@ import Strike from "./Strike";
  * @param {Function} onTileClick Callback function for clicking on a tile
  * @returns A Board component
  */
-function Board({ playerTurn, tiles, onTileClick }) {
+function Board({ playerTurn, winner, tiles, onTileClick }) {
     return (
         <div className={styles.board}>
             {tiles.map((tile, index) =>
@@ -19,6 +19,7 @@ function Board({ playerTurn, tiles, onTileClick }) {
                     key={index}
                     onClick={() => onTileClick(index)}
                     playerTurn={playerTurn}
+                    winner={winner}
                 />)
             }
             <Strike/>

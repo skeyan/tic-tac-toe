@@ -8,12 +8,17 @@ import { PLAYER_O, PLAYER_X } from '../../Utils/constants';
  * @param {playerTurn} The constant value representing the name of the current player whose turn it is
  * @returns A single tile component
  */
-function Tile({ value, onClick, playerTurn }) {
+function Tile({ value, onClick, playerTurn, winner }) {
     /**
      * A function to create the visual-only placeholder element that shows when hovering over a TicTacToe tile.
      * @returns HTML for the placeholder that shows on hover
      */
     function placeholderValue()  {
+        // Do not show a placeholder if the game has already been won
+        if (winner) {
+            return;
+        }
+
         if (playerTurn === PLAYER_X) {
             return <div className={styles['tile__value-placeholder']} inert="true">X</div>;
         } else if (playerTurn === PLAYER_O) {

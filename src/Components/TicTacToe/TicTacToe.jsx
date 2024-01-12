@@ -89,7 +89,7 @@ export const TicTacToe = () => {
                 <div className={styles.subtitle}>Winner: {winner}</div> :
                 <div className={styles.subtitle}>Current Turn: {playerTurn}</div>
             }
-            <Board playerTurn={playerTurn} tiles={tiles} onTileClick={handleTileClick}/>
+            <Board playerTurn={playerTurn} winner={winner} tiles={tiles} onTileClick={handleTileClick}/>
             <button className={styles.reset}>Reset</button>
         </div>
     )

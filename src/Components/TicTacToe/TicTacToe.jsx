@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './TicTacToe.module.css';
 import { PLAYER_O, PLAYER_X } from '../../Utils/constants';
 import Board from './Board';
+import History from './History';
 
 /**
  * A simple TicTacToe game component with the standard board and conditions.
@@ -23,9 +24,24 @@ export const TicTacToe = () => {
      */
     const [winner, setWinner] = useState(null);
     /**
-     * @property {String} winCombo The combination the won the current game.
+     * @property {Array} winCombo The combination the won the current game.
      */
     const [winCombo, setWinCombo] = useState([]);
+    /**
+     * @property {Array<Object>} history The states/moves so far in the current game.
+     * Sample data:
+     * [
+     *      {
+     *          playerTurn: 'X',
+     *          moves: [[]],
+     *      },
+     *      {
+     *          winner: 'X',
+     *          moves: [[],...,['XXX']],
+     *      }
+     * ]
+     */
+    const [history, setHistory] = useState([[]]);
 
     /**
      * Callback function for when a tile is clicked.
@@ -43,9 +59,20 @@ export const TicTacToe = () => {
         const updatedTiles = [...tiles];
         updatedTiles[clickedTileIndex] = playerTurn;
         setTiles(updatedTiles);
+
+        // Update history
+        const updatedHistory = history.slice();
+        updatedHistory.push({
+            playerTurn: playerTurn,
+            moves: updatedTiles,
+        });
+        setHistory(updatedHistory);
+
+        // Update game
         checkWinStatus(updatedTiles);
         switchPlayerTurn();
     }
+
 
     /**
      * A function to help swap player turns.
@@ -90,9 +117,28 @@ export const TicTacToe = () => {
      */
     const resetGame = () => {
         setTiles(Array(9).fill(null));
+        setHistory([[]]);
         setPlayerTurn(PLAYER_X);
         setWinCombo([]);
         setWinner(null);
+    }
+
+    /**
+     * Function to set the game to a certain point.
+     * @param {int} index
+     * @param {Array<Object>} history
+     * @return void
+     */
+    const setGame = (history) => {
+        if (history.length <= 1) {
+            resetGame();
+            return;
+        }
+        const { playerTurn, moves } = history[history.length - 1];
+        setTiles(moves[moves.length - 1]);
+        setHistory(moves);
+        setPlayerTurn(playerTurn);
+        checkWinStatus(tiles);
     }
 
     return (
@@ -103,13 +149,16 @@ export const TicTacToe = () => {
                 <div className={styles.subtitle}>Winner: {winner}</div> :
                 <div className={styles.subtitle}>Current Turn: {playerTurn}</div>
             }
-            <Board
-                playerTurn={playerTurn}
-                winner={winner}
-                winCombo={winCombo}
-                tiles={tiles}
-                onTileClick={handleTileClick}
-            />
+            <div className={styles['game-area']}>
+                <Board
+                    playerTurn={playerTurn}
+                    winner={winner}
+                    winCombo={winCombo}
+                    tiles={tiles}
+                    onTileClick={handleTileClick}
+                />
+                <History history={history} handleHistoryClick={setGame}/>
+            </div>
             <button className={styles.reset} onClick={resetGame}>Reset</button>
         </div>
     )

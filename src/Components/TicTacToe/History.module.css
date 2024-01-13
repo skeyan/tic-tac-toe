@@ -1,0 +1,22 @@
+.history-container {
+    border: 1px solid white;
+    border-radius: 12px;
+    margin-top: 12px;
+    margin-left: 12px;
+    text-align: left;
+    width: 15rem;
+}
+
+.move--button {
+    background-color: none;
+    color: white;
+    padding-left: 10px;
+}
+
+@media (max-width: 400px) {
+    .history-container {
+        margin-left: 0px;
+        min-height: 5rem;
+        width: 100%;
+    }
+}

@@ -22,6 +22,18 @@
     text-align: center;
 }
 
+.game-area {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 400px) {
+    .game-area {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 .reset {
     background: #1f3540;
     border: 0px;

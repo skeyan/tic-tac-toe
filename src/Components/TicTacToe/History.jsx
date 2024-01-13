@@ -3,15 +3,16 @@ import styles from "./History.module.css";
 
 /**
  * @param {Array} moves The moves that have been taken during the current game
- * @returns Component showing the move history of the current game
+ * @returns Component showing the move history of the current game or void
  */
 export default function History({history, handleHistoryClick}) {
     const historyListComponent = history.map((individualHistory, index) => {
         let description = '';
-        if (individualHistory.moves?.length > 0) {
-          description = 'Go to move #' + index;
+        const { moves } = individualHistory;
+        if (moves?.length > 0) {
+          description = 'Go to move #' + (index + 1);
         } else {
-          description = 'Go to game start';
+          return null;
         }
         const partialHistory = history.slice(0, index + 1);
         return (
